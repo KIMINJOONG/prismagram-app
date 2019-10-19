@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity} from "react-native";
+import { View } from "react-native";
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from "../screens/Home";
 import Search from "../screens/Search";
 import Notifications from "../screens/Notifications";
 import Profile from "../screens/Profile";
 import { createStackNavigator } from "react-navigation-stack";
+import MessagesLink from '../components/MessagesLink';
 
 const stackFactory = (initialRoute, customConfig) => 
   createStackNavigator({
@@ -19,11 +20,7 @@ const TabNavigation = createBottomTabNavigator({
   Home: {
     screen: stackFactory(Home, {
       title: 'Home',
-      headerRight: (
-        <TouchableOpacity>
-          <Text>hi</Text>
-        </TouchableOpacity>
-      )
+      headerRight: <MessagesLink />
     })
   },
   Search: {
