@@ -18,7 +18,7 @@ const Text = styled.Text``;
 export default ({navigation}) => {
   const emailInput = useInput('');
   const [loading, setLoading] = useState(false);
-  const requestSecret = useMutation(LOG_IN, {
+  const [requestSecretMutation] = useMutation(LOG_IN, {
     variables: {
       email: emailInput.value
     }
@@ -36,9 +36,17 @@ export default ({navigation}) => {
 
     try {
       setLoading(true);
-      await requestSecret();
-      Alert.alert('비밀번호를 이메일로 보냈습니다.');
-      navigation.navigate('Confirm');
+      const {
+        data: { requestSecret }
+      } = await requestSecretMutation();
+      if(requestSecret) {
+        Alert.alert('비밀번호를 이메일로 보냈습니다.');
+        navigation.navigate('Confirm');
+      } else {
+        Alert.alert('계정을 찾을수 없습니다.');
+        navigation.navigate('Signup');
+      }
+      
     }catch(e) {
       Alert.alert('지금 로그인을 할 수 없습니다.');
     }finally {
@@ -53,7 +61,7 @@ export default ({navigation}) => {
           placeholder="Email" 
           keyboardType="email-address" 
           returnKeyType='send'
-          onEndEditing={handleLogin}
+          onSubmitEditing={handleLogin}
           autoCorrect={false}
           />
         <AuthButton 
