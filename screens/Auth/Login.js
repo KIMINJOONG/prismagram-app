@@ -41,10 +41,11 @@ export default ({navigation}) => {
       } = await requestSecretMutation();
       if(requestSecret) {
         Alert.alert('비밀번호를 이메일로 보냈습니다.');
-        navigation.navigate('Confirm');
+        navigation.navigate('Confirm', { email: value });
+        return;
       } else {
         Alert.alert('계정을 찾을수 없습니다.');
-        navigation.navigate('Signup');
+        navigation.navigate('Signup', { email: value });
       }
       
     }catch(e) {
