@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import { Alert } from "react-native";
 import { useMutation } from "react-apollo-hooks";
-import { Facebook } from "expo";
+import * as Facebook from "expo-facebook";
 import AuthButton from "../../components/AuthButton";
 import AuthInput from "../../components/AuthInput";
 import useInput from "../../hooks/useInput";
