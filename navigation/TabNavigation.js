@@ -13,7 +13,12 @@ const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator({
     InitialRoute: {
       screen: initialRoute,
-      navigationOptions: { ...customConfig}
+      navigationOptions: { 
+        ...customConfig, 
+        headerStyle: { 
+          backgroundColor: '#EFEEEF'
+        }
+      }
     }
   });
 
@@ -29,8 +34,9 @@ const TabNavigation = createBottomTabNavigator({
       )
     }),
     navigationOptions: {
-      tabBarIcon: (
+      tabBarIcon: ({focused}) => (
         <NavIcon 
+          focused={focused}
           name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
         />
       )
@@ -41,8 +47,10 @@ const TabNavigation = createBottomTabNavigator({
       title: 'Search'
     }),
     navigationOptions: {
-      tabBarIcon: (
-        <NavIcon 
+      tabBarIcon: ({focused}) => (
+        <NavIcon
+          focused={focused}
+          size={28} 
           name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
         />
       )
@@ -64,9 +72,17 @@ const TabNavigation = createBottomTabNavigator({
       title: 'Notifications'
     }),
     navigationOptions: {
-      tabBarIcon: (
-        <NavIcon 
-          name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
+      tabBarIcon: ({focused}) => (
+        <NavIcon
+          focused={focused} 
+          name={
+            Platform.OS === 'ios' 
+            ? focused 
+            ? 'ios-heart'
+            : 'ios-heart-empty' 
+            : focused ? 'md-heart' 
+            : 'md-heart-empty'
+          }
         />
       )
     }
@@ -76,8 +92,9 @@ const TabNavigation = createBottomTabNavigator({
       title: 'Profile'
     }),
     navigationOptions: {
-      tabBarIcon: (
+      tabBarIcon: ({focused}) => (
         <NavIcon 
+          focused={focused}
           name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
         />
       )
@@ -85,7 +102,10 @@ const TabNavigation = createBottomTabNavigator({
   }
 }, {
   tabBarOptions: {
-    showLabel: false
+    showLabel: false,
+    tabStyle: {
+      backgroundColor: '#EFEEEF'
+    }
   }
 });
 
