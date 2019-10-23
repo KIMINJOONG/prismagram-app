@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Image, Platform } from "react-native";
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import Home from "../screens/Home";
-import Search from "../screens/Search";
-import Notifications from "../screens/Notifications";
-import Profile from "../screens/Profile";
+import Home from "../screens/Tabs/Home";
+import Search from "../screens/Tabs/Search";
+import Notifications from "../screens/Tabs/Notifications";
+import Profile from "../screens/Tabs/Profile";
 import { createStackNavigator } from "react-navigation-stack";
 import MessagesLink from '../components/MessagesLink';
 import NavIcon from '../components/NavIcon';
