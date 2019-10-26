@@ -1,9 +1,7 @@
 import React from "react";
 import { Platform } from "react-native";
-import {
-  createBottomTabNavigator,
-  createStackNavigator
-} from "react-navigation";
+import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createStackNavigator} from 'react-navigation-stack';
 import Home from "../screens/Tabs/Home";
 import Search from "../screens/Tabs/Search";
 import Notifications from "../screens/Tabs/Notifications";
