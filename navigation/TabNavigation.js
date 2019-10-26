@@ -3,6 +3,7 @@ import { View, Image, Platform } from "react-native";
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from "../screens/Tabs/Home";
 import Search from "../screens/Tabs/Search";
+import Detail from '../screens/Detail';
 import Notifications from "../screens/Tabs/Notifications";
 import Profile from "../screens/Tabs/Profile";
 import { createStackNavigator } from "react-navigation-stack";
@@ -19,7 +20,8 @@ const stackFactory = (initialRoute, customConfig) =>
         headerStyle: { 
           ...stackStyle  
         }
-      }
+      },
+      Detail,
     }
   });
 
