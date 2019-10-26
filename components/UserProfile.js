@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState } from "react";
 import { Image, View, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import styles from "../styles";
 import { Platform } from "@unimodules/core";
 import constants from "../constants";
+import SquarePhoto from "./SquarePhoto";
+import Post from "./Post";
 
 const ProfileHeader = styled.View`
   padding: 20px;
@@ -57,55 +59,69 @@ const UserProfile = ({
   followersCount,
   followingCount,
   bio,
-  fullName
-}) => (
-  <View>
-    <ProfileHeader>
-      <Image
-        style={{ height: 80, width: 80, borderRadius: 40 }}
-        source={{ uri: avatar }}
-      />
-      <HeaderColumn>
-        <ProfileStats>
-          <Stat>
-            <Bold>{postsCount}</Bold>
-            <StatName>Posts</StatName>
-          </Stat>
-          <Stat>
-            <Bold>{followersCount}</Bold>
-            <StatName>Followers</StatName>
-          </Stat>
-          <Stat>
-            <Bold>{followingCount}</Bold>
-            <StatName>Following</StatName>
-          </Stat>
-        </ProfileStats>
-      </HeaderColumn>
-    </ProfileHeader>
-    <ProfileMeta>
-      <Bold>{fullName}</Bold>
-      <Bio>{bio}</Bio>
-    </ProfileMeta>
-    <ButtonContainer>
-      <TouchableOpacity>
-        <Button>
-          <Ionicons
-            size={32}
-            name={Platform.OS === "ios" ? "ios-grid" : "md-grid"}
+  fullName,
+  posts
+}) => {
+  const [isGrid, setIsGrid] = useState(true);
+  const toggleGrid = () => setIsGrid(i => !i);
+  return (
+      <View>
+        <ProfileHeader>
+          <Image
+            style={{ height: 80, width: 80, borderRadius: 40 }}
+            source={{ uri: avatar }}
           />
-        </Button>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Button>
-          <Ionicons
-            size={32}
-            name={Platform.OS === "ios" ? "ios-list" : "md-list"}
-          />
-        </Button>
-      </TouchableOpacity>
-    </ButtonContainer>
-  </View>
-);
+          <HeaderColumn>
+            <ProfileStats>
+              <Stat>
+                <Bold>{postsCount}</Bold>
+                <StatName>Posts</StatName>
+              </Stat>
+              <Stat>
+                <Bold>{followersCount}</Bold>
+                <StatName>Followers</StatName>
+              </Stat>
+              <Stat>
+                <Bold>{followingCount}</Bold>
+                <StatName>Following</StatName>
+              </Stat>
+            </ProfileStats>
+          </HeaderColumn>
+        </ProfileHeader>
+        <ProfileMeta>
+          <Bold>{fullName}</Bold>
+          <Bio>{bio}</Bio>
+        </ProfileMeta>
+        <ButtonContainer>
+          <TouchableOpacity onPress={toggleGrid}>
+            <Button>
+              <Ionicons
+                color={isGrid ? styles.blackColor : styles.darkGreyColor}
+                size={32}
+                name={Platform.OS === "ios" ? "ios-grid" : "md-grid"}
+              />
+            </Button>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={toggleGrid}>
+            <Button>
+              <Ionicons
+                color={!isGrid ? styles.blackColor : styles.darkGreyColor}
+                size={32}
+                name={Platform.OS === "ios" ? "ios-list" : "md-list"}
+              />
+            </Button>
+          </TouchableOpacity>
+        </ButtonContainer>
+        {posts && posts.map(p => 
+          isGrid ? (
+            <SquarePhoto key={p.id} {...p} />
+          ) : (
+            <Post key={p.id} {...p} />
+          )
+        )}
+      </View>
+  );
+};
 
 UserProfile.propTypes = {
   id: PropTypes.string.isRequired,
