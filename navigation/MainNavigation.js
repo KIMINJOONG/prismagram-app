@@ -6,8 +6,8 @@ import MessageNavigation from './MessageNavigation';
 import { stackStyle } from './config';
 
 const MainNavigation = createStackNavigator({
-    TabNavigation,
     PhotoNavigation,
+    TabNavigation,
     MessageNavigation
 }, {
     defaultNavigationOptions: {
