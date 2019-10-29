@@ -28,7 +28,7 @@ const Text = styled.Text`
   font-weight: 600;
 `;
 
-export default () => {
+export default ({navigation}) => {
   const [loading, setLoading ] = useState(true);
   const [hasPermission, setHasPermission] = useState(false);
   const [selected, setSelected] = useState();

@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Platform } from "@unimodules/core";
 import styles from "../../styles";
 import * as MediaLibrary from 'expo-media-library';
+import * as Permissions from 'expo-permissions';
 
 const View = styled.View`
   flex: 1;
