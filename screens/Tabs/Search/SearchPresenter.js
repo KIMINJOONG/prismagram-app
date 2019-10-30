@@ -23,7 +23,7 @@ export const SEARCH = gql`
 
 const SearchPresenter = ({ term, shouldFetch }) => {
   const [refreshing, setRefreshing] = useState(false);
-  const { data, loading, refetch } = useQuery(SEARCH, {
+  const [ data, loading, refetch ] = useQuery(SEARCH, {
     variables: {
       term
     },
