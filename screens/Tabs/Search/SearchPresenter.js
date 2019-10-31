@@ -23,14 +23,13 @@ export const SEARCH = gql`
 
 const SearchPresenter = ({ term, shouldFetch }) => {
   const [refreshing, setRefreshing] = useState(false);
-  const [ data, loading, refetch ] = useQuery(SEARCH, {
+  const { loading, data, refetch} = useQuery(SEARCH, {
     variables: {
       term
     },
     skip: !shouldFetch,
     fetchPolicy: 'network-only'
   });
-  console.log(data, loading);
   const onRefresh = async () => {
     try {
       setRefreshing(true);
